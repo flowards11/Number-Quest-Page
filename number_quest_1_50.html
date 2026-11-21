@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Quest 1–50 | Adventure with Numbers</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        skybg: '#E0F2FE',
+                        skycard: '#F0F9FF',
+                        sunyellow: '#FACC15',
+                        sunorange: '#FB923C',
+                        coralpink: '#FB7185',
+                        mintgreen: '#34D399',
+                        emeraldgreen: '#10B981',
+                        softpurple: '#A78BFA',
+                        deepblue: '#1E3A8A',
+                        cloudwhite: '#FFFFFF',
+                        kidpurple: '#9333EA'
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        nunito: ['Nunito', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #E0F2FE;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(250, 204, 21, 0.4) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(167, 139, 250, 0.35) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(52, 211, 153, 0.25) 0%, transparent 40%);
+            color: #1E293B;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* Animated Elements */
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px) rotate(-2deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        @keyframes pulse-bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+
+        @keyframes mic-wave {
+            0%, 100% { height: 10px; }
+            50% { height: 36px; }
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.9; }
+            50% { transform: scale(1.25); opacity: 0.3; }
+            100% { transform: scale(0.95); opacity: 0.9; }
+        }
+
+        .animate-float {
+            animation: float-slow 3.5s ease-in-out infinite;
+        }
+
+        .animate-pulse-bounce {
+            animation: pulse-bounce 2s ease-in-out infinite;
+        }
+
+        .pulse-ring-active {
+            animation: pulse-ring 1.4s ease-in-out infinite;
+        }
+
+        .mic-bar {
+            width: 8px;
+            background-color: #FB7185;
+            border-radius: 9999px;
+            animation: mic-wave 0.6s ease-in-out infinite;
+        }
+        .mic-bar:nth-child(2) { animation-delay: 0.15s; background-color: #FACC15; }
+        .mic-bar:nth-child(3) { animation-delay: 0.30s; background-color: #34D399; }
+        .mic-bar:nth-child(4) { animation-delay: 0.45s; background-color: #A78BFA; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #BAE6FD;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FB7185;
+            border-radius: 6px;
+            border: 2px solid #BAE6FD;
+        }
+
+        /* Print styling for Explorer Certificate */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            #printable-certificate {
+                border: 8px solid #9333EA !important;
+                box-shadow: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 30px !important;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-sunyellow selection:text-deepblue">
+
+    <!-- TOP HEADER / KID-FRIENDLY NAVIGATION DASHBOARD -->
+    <header class="bg-cloudwhite border-b-8 border-sunyellow shadow-lg sticky top-0 z-50 no-print">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-3">
+            
+            <!-- Logo & Mascot -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchSection('explore')">
+                <div class="w-14 h-14 bg-gradient-to-tr from-sunorange to-sunyellow rounded-2xl flex items-center justify-center shadow-md transform hover:rotate-6 transition">
+                    <!-- Nico Robot SVG Icon -->
+                    <svg class="w-10 h-10 drop-shadow" viewBox="0 0 100 100" fill="none">
+                        <rect x="20" y="30" width="60" height="50" rx="15" fill="#3B82F6" stroke="#1E3A8A" stroke-width="4"/>
+                        <rect x="30" y="40" width="40" height="25" rx="8" fill="#FEF08A"/>
+                        <circle cx="42" cy="52" r="5" fill="#1E3A8A"/>
+                        <circle cx="58" cy="52" r="5" fill="#1E3A8A"/>
+                        <circle cx="44" cy="50" r="2" fill="#FFFFFF"/>
+                        <circle cx="60" cy="50" r="2" fill="#FFFFFF"/>
+                        <path d="M43 60 Q50 66 57 60" stroke="#FB7185" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                        <rect x="47" y="12" width="6" height="18" fill="#FB7185"/>
+                        <circle cx="50" cy="10" r="8" fill="#FACC15" stroke="#1E3A8A" stroke-width="2"/>
+                        <rect x="8" y="48" width="12" height="14" rx="5" fill="#34D399"/>
+                        <rect x="80" y="48" width="12" height="14" rx="5" fill="#34D399"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-heading font-black text-deepblue tracking-tight leading-none">
+                        Number Quest <span class="text-coralpink">1–50</span>
+                    </h1>
+                    <p class="text-xs sm:text-sm font-bold text-emeraldgreen flex items-center gap-1">
+                        <span>🤖 Adventure with Nico on Number Island!</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Explorer Name Input -->
+            <div class="flex items-center space-x-2 bg-skybg px-4 py-2 rounded-2xl border-2 border-sky-300 shadow-inner">
+                <span class="text-2xl">🧑‍🚀</span>
+                <div>
+                    <span class="text-[10px] text-slate-500 font-bold uppercase block leading-none">Explorer Name:</span>
+                    <input type="text" id="explorer-name-input" value="Super Student" 
+                           class="bg-transparent text-deepblue font-heading font-bold text-base outline-none w-28 sm:w-36 border-b border-dashed border-deepblue focus:border-coralpink transition"
+                           title="Click to change your name" oninput="updateExplorerName(this.value)">
+                </div>
+            </div>
+
+            <!-- Controls & Live Star Counter -->
+            <div class="flex items-center space-x-3">
+                <!-- Audio Test Button -->
+                <button onclick="testAudioVoice()" class="bg-mintgreen hover:bg-emeraldgreen text-deepblue font-heading font-bold px-3 py-2 rounded-2xl text-xs sm:text-sm shadow border-2 border-emerald-500 flex items-center space-x-1.5 transform hover:scale-105 transition" title="Test voice sound on your device">
+                    <span class="text-lg">🔊</span>
+                    <span class="hidden sm:inline">Test Voice</span>
+                </button>
+
+                <!-- Stars Counter -->
+                <div class="bg-gradient-to-r from-sunyellow to-amber-300 px-4 py-2 rounded-2xl border-2 border-amber-400 shadow-md flex items-center space-x-2 animate-pulse-bounce">
+                    <span class="text-2xl">⭐</span>
+                    <div>
+                        <span class="text-[10px] font-bold text-amber-900 block leading-none uppercase">Stars</span>
+                        <span id="star-count" class="font-heading text-2xl text-amber-950 font-black leading-none">0</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- NAVIGATION TABS -->
+        <nav class="max-w-7xl mx-auto px-4 mt-2 flex space-x-2 overflow-x-auto pb-2 scrollbar-none">
+            <button id="nav-btn-explore" onclick="switchSection('explore')" class="nav-btn bg-coralpink text-cloudwhite font-heading px-5 py-2.5 rounded-2xl text-sm sm:text-base font-bold flex items-center space-x-2 shadow-md transition transform hover:scale-105">
+                <span class="text-xl">🗺️</span> <span>1. Explore (1–50)</span>
+            </button>
+            <button id="nav-btn-teen-ty" onclick="switchSection('teen-ty')" class="nav-btn bg-sky-200 text-deepblue font-heading px-5 py-2.5 rounded-2xl text-sm sm:text-base font-bold flex items-center space-x-2 hover:bg-sky-300 transition">
+                <span class="text-xl">⚡</span> <span>2. Teen vs. Ty Studio</span>
+            </button>
+            <button id="nav-btn-missions" onclick="switchSection('missions')" class="nav-btn bg-sky-200 text-deepblue font-heading px-5 py-2.5 rounded-2xl text-sm sm:text-base font-bold flex items-center space-x-2 hover:bg-sky-300 transition">
+                <span class="text-xl">🚀</span> <span>3. Game Missions</span>
+            </button>
+            <button id="nav-btn-realtalk" onclick="switchSection('realtalk')" class="nav-btn bg-sky-200 text-deepblue font-heading px-5 py-2.5 rounded-2xl text-sm sm:text-base font-bold flex items-center space-x-2 hover:bg-sky-300 transition">
+                <span class="text-xl">🗣️</span> <span>4. Real Talk (CLT)</span>
+            </button>
+            <button id="nav-btn-certificate" onclick="switchSection('certificate')" class="nav-btn bg-sky-200 text-deepblue font-heading px-5 py-2.5 rounded-2xl text-sm sm:text-base font-bold flex items-center space-x-2 hover:bg-sky-300 transition">
+                <span class="text-xl">🏆</span> <span>Certificate</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- MAIN APP BODY -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full">
+
+        <!-- ===================================================================
+             SECTION 1: INTERACTIVE NUMBER ISLAND CHART & FLASHCARDS (1-50)
+             =================================================================== -->
+        <section id="section-explore" class="space-y-6">
+            
+            <!-- Banner with Mascot -->
+            <div class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 rounded-3xl p-6 shadow-2xl text-cloudwhite flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+                <div class="space-y-3 max-w-2xl z-10">
+                    <span class="bg-sunyellow text-deepblue font-heading text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow">
+                        LabINNOVA Grade 3 • Level A1/A2
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-black leading-tight text-sunyellow drop-shadow-md">
+                        Help Nico find the missing numbers!
+                    </h2>
+                    <p class="text-base text-blue-100 font-semibold leading-relaxed">
+                        Oh no! A playful wind scattered numbers 1 to 50 all over Number Island! Tap any card to hear real pronunciation, count visual items, and practice rhythm chants!
+                    </p>
+                </div>
+
+                <!-- Mascot Card -->
+                <div class="w-36 h-36 sm:w-44 sm:h-44 bg-cloudwhite/10 backdrop-blur-md border-4 border-sunyellow/60 rounded-3xl p-3 flex flex-col items-center justify-center relative flex-shrink-0 animate-float shadow-xl">
+                    <svg class="w-24 h-24 drop-shadow-lg" viewBox="0 0 100 100" fill="none">
+                        <rect x="20" y="30" width="60" height="50" rx="15" fill="#3B82F6" stroke="#FFFFFF" stroke-width="3"/>
+                        <rect x="30" y="40" width="40" height="25" rx="8" fill="#FEF08A"/>
+                        <circle cx="42" cy="52" r="6" fill="#1E3A8A"/>
+                        <circle cx="58" cy="52" r="6" fill="#1E3A8A"/>
+                        <circle cx="44" cy="50" r="2.5" fill="#FFFFFF"/>
+                        <circle cx="60" cy="50" r="2.5" fill="#FFFFFF"/>
+                        <path d="M41 60 Q50 68 59 60" stroke="#FB7185" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                        <rect x="47" y="12" width="6" height="18" fill="#FB7185"/>
+                        <circle cx="50" cy="10" r="8" fill="#FACC15"/>
+                        <rect x="8" y="48" width="12" height="14" rx="5" fill="#34D399"/>
+                        <rect x="80" y="48" width="12" height="14" rx="5" fill="#34D399"/>
+                    </svg>
+                    <div id="nico-speaking-indicator" class="hidden absolute bottom-2 flex items-center space-x-1">
+                        <div class="mic-bar"></div>
+                        <div class="mic-bar"></div>
+                        <div class="mic-bar"></div>
+                        <span class="text-[10px] font-bold text-sunyellow ml-1">Speaking...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level Scaffolding & Audio Controls -->
+            <div class="bg-cloudwhite rounded-3xl p-5 border-4 border-sky-200 shadow-md space-y-4">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-4 border-b border-sky-100 pb-4">
+                    <div class="w-full lg:w-auto">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">🎯 Select Level Range (Scaffolding):</span>
+                        <div class="flex flex-wrap gap-1.5">
+                            <button onclick="filterNumberRange('all')" id="range-btn-all" class="range-btn bg-coralpink text-cloudwhite px-3 py-1.5 rounded-xl text-xs sm:text-sm font-heading font-bold shadow transition">All (1–50)</button>
+                            <button onclick="filterNumberRange('1-10')" id="range-btn-1-10" class="range-btn bg-sky-100 text-deepblue hover:bg-sky-200 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-heading font-bold transition">1–10</button>
+                            <button onclick="filterNumberRange('11-20')" id="range-btn-11-20" class="range-btn bg-sky-100 text-deepblue hover:bg-sky-200 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-heading font-bold transition">11–20</button>
+                            <button onclick="filterNumberRange('21-30')" id="range-btn-21-30" class="range-btn bg-sky-100 text-deepblue hover:bg-sky-200 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-heading font-bold transition">21–30</button>
+                            <button onclick="filterNumberRange('31-40')" id="range-btn-31-40" class="range-btn bg-sky-100 text-deepblue hover:bg-sky-200 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-heading font-bold transition">31–40</button>
+                            <button onclick="filterNumberRange('41-50')" id="range-btn-41-50" class="range-btn bg-sky-100 text-deepblue hover:bg-sky-200 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-heading font-bold transition">41–50</button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3 w-full lg:w-auto justify-end">
+                        <span class="text-xs font-bold text-slate-500 uppercase">Voice Speed:</span>
+                        <button id="speed-toggle-btn" onclick="toggleVoiceSpeed()" class="bg-purple-100 text-purple-900 border border-purple-300 font-heading font-bold text-xs px-3 py-1.5 rounded-xl flex items-center space-x-1 shadow-sm">
+                            <span>🚀 Normal (1.0x)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chants Bar -->
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-gradient-to-r from-amber-50 to-orange-50 p-3 rounded-2xl border border-amber-200">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-2xl">🎵</span>
+                        <div>
+                            <h3 class="font-heading font-bold text-deepblue text-sm">Rhythmic Skip-Counting Chants</h3>
+                            <p class="text-[11px] text-slate-600 font-semibold">Listen to Nico count aloud with highlighted number cards!</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="startChant(1)" class="bg-sunyellow hover:bg-yellow-400 text-amber-950 text-xs font-heading font-bold px-3 py-1.5 rounded-xl shadow transition flex items-center space-x-1">
+                            <span>▶</span> <span>Count 1s</span>
+                        </button>
+                        <button onclick="startChant(2)" class="bg-mintgreen hover:bg-emeraldgreen text-deepblue text-xs font-heading font-bold px-3 py-1.5 rounded-xl shadow transition flex items-center space-x-1">
+                            <span>▶</span> <span>By 2s</span>
+                        </button>
+                        <button onclick="startChant(5)" class="bg-coralpink hover:bg-rose-500 text-cloudwhite text-xs font-heading font-bold px-3 py-1.5 rounded-xl shadow transition flex items-center space-x-1">
+                            <span>▶</span> <span>By 5s</span>
+                        </button>
+                        <button onclick="startChant(10)" class="bg-softpurple hover:bg-purple-500 text-cloudwhite text-xs font-heading font-bold px-3 py-1.5 rounded-xl shadow transition flex items-center space-x-1">
+                            <span>▶</span> <span>By 10s</span>
+                        </button>
+                        <button onclick="stopChant()" class="bg-rose-100 text-rose-700 hover:bg-rose-200 text-xs font-heading font-bold px-3 py-1.5 rounded-xl transition">
+                            ⏹ Stop Chant
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1–50 Number Grid -->
+            <div class="bg-cloudwhite rounded-3xl p-4 sm:p-6 border-4 border-sky-200 shadow-xl space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-heading font-black text-deepblue flex items-center gap-2">
+                        <span>🔢</span> <span>Interactive Island Number Chart (Tap to Listen!)</span>
+                    </h3>
+                </div>
+                <div id="number-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-2 sm:gap-3">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Flashcard Modal -->
+            <div id="flashcard-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+                <div class="bg-cloudwhite border-8 border-sunyellow rounded-3xl max-w-lg w-full p-6 shadow-2xl relative animate-pulse-bounce">
+                    <button onclick="closeFlashcard()" class="absolute top-4 right-4 bg-rose-500 text-cloudwhite hover:bg-rose-600 font-heading text-lg font-black w-10 h-10 rounded-full flex items-center justify-center shadow">✕</button>
+
+                    <div class="flex flex-col items-center text-center space-y-4">
+                        <div class="w-28 h-28 bg-gradient-to-tr from-coralpink to-sunorange rounded-full border-4 border-cloudwhite shadow-xl flex items-center justify-center">
+                            <span id="fc-numeral" class="text-5xl font-heading font-black text-cloudwhite drop-shadow">0</span>
+                        </div>
+                        <div>
+                            <h4 id="fc-word" class="text-3xl font-heading font-black text-deepblue capitalize">--</h4>
+                            <p id="fc-hyphen-note" class="text-xs font-bold text-coralpink mt-1"></p>
+                        </div>
+                        <button id="fc-audio-btn" class="bg-emeraldgreen hover:bg-emerald-600 text-cloudwhite font-heading font-bold px-6 py-2.5 rounded-full text-base shadow-lg flex items-center space-x-2 transform hover:scale-105 transition">
+                            <span class="text-xl">🔊</span> <span>Listen Pronunciation</span>
+                        </button>
+                        <div class="w-full bg-sky-50 rounded-2xl p-4 border-2 border-sky-200">
+                            <span id="fc-quantity-label" class="text-xs font-bold text-slate-500 uppercase block mb-2">Visual Quantity:</span>
+                            <div id="fc-items-grid" class="flex flex-wrap justify-center gap-1.5 max-h-36 overflow-y-auto p-2 bg-cloudwhite rounded-xl border border-sky-100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ===================================================================
+             SECTION 2: TEEN VS. TY STUDIO
+             =================================================================== -->
+        <section id="section-teen-ty" class="hidden space-y-6">
+            <div class="bg-cloudwhite rounded-3xl p-6 border-4 border-purple-200 shadow-xl space-y-6">
+                <div class="border-b border-purple-100 pb-4">
+                    <span class="bg-purple-100 text-purple-800 font-heading text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-purple-200">
+                        Section 2 • Pronunciation & Phonetics
+                    </span>
+                    <h2 class="text-3xl font-heading font-black text-deepblue mt-2">
+                        ⚡ Teen vs. Ty Pronunciation Studio
+                    </h2>
+                    <p class="text-slate-600 font-semibold text-sm mt-1">
+                        Don't confuse numbers like <span class="text-coralpink font-bold">13 (thirteen)</span> and <span class="text-emeraldgreen font-bold">30 (thirty)</span>! Listen to where the strong stress goes!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gradient-to-br from-rose-50 to-pink-100 border-2 border-rose-300 rounded-2xl p-4 flex items-center space-x-4">
+                        <div class="w-14 h-14 bg-coralpink rounded-2xl flex items-center justify-center text-3xl text-cloudwhite font-heading font-bold shadow">13</div>
+                        <div>
+                            <h4 class="font-heading font-bold text-rose-900 text-lg">Numbers ending in -TEEN</h4>
+                            <p class="text-xs font-semibold text-rose-700">Long stress at the end! E.g. thir-TEEN 🎶</p>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-emerald-50 to-teal-100 border-2 border-emerald-300 rounded-2xl p-4 flex items-center space-x-4">
+                        <div class="w-14 h-14 bg-emeraldgreen rounded-2xl flex items-center justify-center text-3xl text-cloudwhite font-heading font-bold shadow">30</div>
+                        <div>
+                            <h4 class="font-heading font-bold text-emerald-900 text-lg">Numbers ending in -TY</h4>
+                            <p class="text-xs font-semibold text-emerald-700">Short stress at the start! E.g. THIR-ty ⚡</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-heading font-bold text-deepblue pt-2">🔊 Tap to Compare Tricky Minimal Pairs:</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Pair 1 -->
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 space-y-3 hover:border-coralpink transition shadow-sm">
+                        <div class="flex items-center justify-between text-xs font-bold text-slate-500">
+                            <span>Minimal Pair #1</span>
+                            <span class="text-purple-600">13 vs 30</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="speakText('thirteen', 0.85, 1.15); playSound('pop');" class="bg-rose-100 hover:bg-rose-200 border-2 border-rose-300 p-3 rounded-xl text-center space-y-1 transition group">
+                                <span class="block text-3xl font-heading font-black text-rose-600 group-hover:scale-110 transition-transform">13</span>
+                                <span class="block text-xs font-bold text-rose-900">thir-TEEN 🔊</span>
+                            </button>
+                            <button onclick="speakText('thirty', 0.95, 0.9); playSound('pop');" class="bg-emerald-100 hover:bg-emerald-200 border-2 border-emerald-300 p-3 rounded-xl text-center space-y-1 transition group">
+                                <span class="block text-3xl font-heading font-black text-emerald-600 group-hover:scale-110 transition-transform">30</span>
+                                <span class="block text-xs font-bold text-emerald-900">THIR-ty 🔊</span>
+                            </button>
+                        </div>
+                        <button onclick="speakMinimalPair('thirteen', 'thirty')" class="w-full bg-purple-100 hover:bg-purple-200 text-purple-900 border border-purple-300 rounded-xl py-1.5 text-xs font-heading font-bold transition flex items-center justify-center space-x-1">
+                            <span>🔊 Listen Pair (thirteen ... thirty)</span>
+                        </button>
+                    </div>
+
+                    <!-- Pair 2 -->
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 space-y-3 hover:border-coralpink transition shadow-sm">
+                        <div class="flex items-center justify-between text-xs font-bold text-slate-500">
+                            <span>Minimal Pair #2</span>
+                            <span class="text-purple-600">14 vs 40</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="speakText('fourteen', 0.85, 1.15); playSound('pop');" class="bg-rose-100 hover:bg-rose-200 border-2 border-rose-300 p-3 rounded-xl text-center space-y-1 transition group">
+                                <span class="block text-3xl font-heading font-black text-rose-600 group-hover:scale-110 transition-transform">14</span>
+                                <span class="block text-xs font-bold text-rose-900">four-TEEN 🔊</span>
+                            </button>
+                            <button onclick="speakText('forty', 0.95, 0.9); playSound('pop');" class="bg-emerald-100 hover:bg-emerald-200 border-2 border-emerald-300 p-3 rounded-xl text-center space-y-1 transition group">
+                                <span class="block text-3xl font-heading font-black text-emerald-600 group-hover:scale-110 transition-transform">40</span>
+                                <span class="block text-xs font-bold text-emerald-900">FOR-ty 🔊</span>
+                            </button>
+                        </div>
+                        <button onclick="speakMinimalPair('fourteen', 'forty')" class="w-full bg-purple-100 hover:bg-purple-200 text-purple-900 border border-purple-300 rounded-xl py-1.5 text-xs font-heading font-bold transition flex items-center justify-center space-x-1">
+                            <span>🔊 Listen Pair (fourteen ... forty)</span>
+                        </button>
+                    </div>
+
+                    <!-- Pair 3 -->
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 space-y-3 hover:border-coralpink transition shadow-sm">
+                        <div class="flex items-center justify-between text-xs font-bold text-slate-500">
+                            <span>Minimal Pair #3</span>
+                            <span class="text-purple-600">15 vs 50</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="speakText('fifteen', 0.85, 1.15); playSound('pop');" class="bg-rose-100 hover:bg-rose-200 border-2 border-rose-300 p-3 rounded-xl text-center space-y-1 transition group">
+                                <span class="block text-3xl font-heading font-black text-rose-600 group-hover:scale-110 transition-transform">15</span>
+                                <span class="block text-xs font-bold text-rose-900">fif-TEEN 🔊</span>
+                            </button>
+                            <button onclick="speakText('fifty', 0.95, 0.9); playSound('pop');" class="bg-emerald-100 hover:bg-emerald-200 border-2 border-emerald-300 p-3 rounded-xl text-center space-y-1 transition group">
+                                <span class="block text-3xl font-heading font-black text-emerald-600 group-hover:scale-110 transition-transform">50</span>
+                                <span class="block text-xs font-bold text-emerald-900">FIF-ty 🔊</span>
+                            </button>
+                        </div>
+                        <button onclick="speakMinimalPair('fifteen', 'fifty')" class="w-full bg-purple-100 hover:bg-purple-200 text-purple-900 border border-purple-300 rounded-xl py-1.5 text-xs font-heading font-bold transition flex items-center justify-center space-x-1">
+                            <span>🔊 Listen Pair (fifteen ... fifty)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================
+             SECTION 3: 4 GAMIFIED MISSIONS (LISTENING, READING, WRITING, SPEAKING)
+             =================================================================== -->
+        <section id="section-missions" class="space-y-6 hidden">
+            
+            <!-- Missions Hub -->
+            <div id="mission-hub" class="space-y-6">
+                <div class="bg-cloudwhite rounded-3xl p-6 border-4 border-sunyellow shadow-lg text-center space-y-2">
+                    <span class="bg-sunyellow text-amber-950 font-heading text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                        LabINNOVA Gamified Challenges
+                    </span>
+                    <h2 class="text-3xl font-heading font-black text-deepblue">🚀 Choose an Island Mission!</h2>
+                    <p class="text-slate-600 text-sm font-semibold max-w-xl mx-auto">
+                        Earn 10 stars for every completed mission round! Finish all 4 skills to win your Explorer Certificate!
+                    </p>
+                </div>
+
+                <!-- 4 Mission Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Mission 1 -->
+                    <div class="bg-cloudwhite border-4 border-rose-300 rounded-3xl p-5 shadow-xl flex flex-col justify-between hover:scale-105 transition duration-300">
+                        <div class="space-y-3">
+                            <div class="w-14 h-14 bg-rose-100 border-2 border-rose-300 rounded-2xl flex items-center justify-center text-3xl shadow-inner">🎈</div>
+                            <div>
+                                <span class="text-xs font-bold text-rose-600 uppercase tracking-wider block">Mission 1 • Listening</span>
+                                <h3 class="text-xl font-heading font-black text-deepblue">Pop the Balloons</h3>
+                            </div>
+                            <p class="text-xs text-slate-600 font-semibold leading-relaxed">
+                                Listen to Nico speak a number and pop the matching balloon! Watch out for 13 vs 30!
+                            </p>
+                        </div>
+                        <div class="pt-6 space-y-2">
+                            <button onclick="startMission(1)" class="w-full bg-rose-500 hover:bg-rose-600 text-cloudwhite font-heading font-bold py-3 rounded-2xl shadow-lg transition flex items-center justify-center space-x-2">
+                                <span>Play Now</span> <span>➔</span>
+                            </button>
+                            <a href="https://wordwall.net/es/resource/124259154?wwmethod=link" target="_blank" rel="noopener noreferrer" class="w-full bg-rose-100 hover:bg-rose-200 text-rose-800 font-heading font-bold py-2 px-3 rounded-2xl text-xs shadow border border-rose-300 transition flex items-center justify-center space-x-1">
+                                <span>🎈 Practice More on Wordwall! 🚀</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mission 2 -->
+                    <div class="bg-cloudwhite border-4 border-amber-300 rounded-3xl p-5 shadow-xl flex flex-col justify-between hover:scale-105 transition duration-300">
+                        <div class="space-y-3">
+                            <div class="w-14 h-14 bg-amber-100 border-2 border-amber-300 rounded-2xl flex items-center justify-center text-3xl shadow-inner">💎</div>
+                            <div>
+                                <span class="text-xs font-bold text-amber-700 uppercase tracking-wider block">Mission 2 • Reading</span>
+                                <h3 class="text-xl font-heading font-black text-deepblue">Treasure Chest</h3>
+                            </div>
+                            <p class="text-xs text-slate-600 font-semibold leading-relaxed">
+                                Read the English map clue word (e.g. "thirty-five") and open the right numbered chest!
+                            </p>
+                        </div>
+                        <div class="pt-6 space-y-2">
+                            <button onclick="startMission(2)" class="w-full bg-sunyellow hover:bg-amber-400 text-amber-950 font-heading font-bold py-3 rounded-2xl shadow-lg transition flex items-center justify-center space-x-2">
+                                <span>Play Now</span> <span>➔</span>
+                            </button>
+                            <a href="https://es.educaplay.com/recursos-educativos/31618423-mission_2_treasure_chest.html" target="_blank" rel="noopener noreferrer" class="w-full bg-amber-100 hover:bg-amber-200 text-amber-900 font-heading font-bold py-2 px-3 rounded-2xl text-xs shadow border border-amber-300 transition flex items-center justify-center space-x-1">
+                                <span>💎 Practice More on Educaplay! 🚀</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mission 3 -->
+                    <div class="bg-cloudwhite border-4 border-emerald-300 rounded-3xl p-5 shadow-xl flex flex-col justify-between hover:scale-105 transition duration-300">
+                        <div class="space-y-3">
+                            <div class="w-14 h-14 bg-emerald-100 border-2 border-emerald-300 rounded-2xl flex items-center justify-center text-3xl shadow-inner">🔐</div>
+                            <div>
+                                <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider block">Mission 3 • Writing</span>
+                                <h3 class="text-xl font-heading font-black text-deepblue">Secret Code Lab</h3>
+                            </div>
+                            <p class="text-xs text-slate-600 font-semibold leading-relaxed">
+                                Type the English words to crack the spy code! Use the hyphen button for compound numbers.
+                            </p>
+                        </div>
+                        <div class="pt-6 space-y-2">
+                            <button onclick="startMission(3)" class="w-full bg-emeraldgreen hover:bg-emerald-600 text-cloudwhite font-heading font-bold py-3 rounded-2xl shadow-lg transition flex items-center justify-center space-x-2">
+                                <span>Play Now</span> <span>➔</span>
+                            </button>
+                            <a href="https://view.genially.com/6b01ab6a728f59ea93a542d0" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-100 hover:bg-emerald-200 text-emerald-900 font-heading font-bold py-2 px-3 rounded-2xl text-xs shadow border border-emerald-300 transition flex items-center justify-center space-x-1">
+                                <span>🔐 Practice More on Genially! 🚀</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mission 4 -->
+                    <div class="bg-cloudwhite border-4 border-purple-400 rounded-3xl p-5 shadow-xl flex flex-col justify-between hover:scale-105 transition duration-300 relative overflow-hidden">
+                        <div class="space-y-3">
+                            <div class="w-14 h-14 bg-purple-100 border-2 border-purple-400 rounded-2xl flex items-center justify-center text-3xl shadow-inner">🎤</div>
+                            <div>
+                                <span class="text-xs font-bold text-purple-700 uppercase tracking-wider block">Mission 4 • Speaking (Real Voice)</span>
+                                <h3 class="text-xl font-heading font-black text-deepblue">Echo Cave Studio</h3>
+                            </div>
+                            <p class="text-xs text-slate-600 font-semibold leading-relaxed">
+                                Prominent "Press to Speak" microphone studio with live evaluation, recording & voice simulation chips!
+                            </p>
+                        </div>
+                        <div class="pt-6">
+                            <button onclick="startMission(4)" class="w-full bg-purple-600 hover:bg-purple-700 text-cloudwhite font-heading font-bold py-3 rounded-2xl shadow-lg transition flex items-center justify-center space-x-2">
+                                <span>Play Now</span> <span>➔</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTIVE GAMEPLAY CONTAINER -->
+            <div id="game-container" class="hidden bg-cloudwhite border-8 border-sky-300 rounded-3xl p-4 sm:p-6 shadow-2xl relative">
+                
+                <button onclick="backToMissionHub()" class="absolute top-4 right-4 bg-sky-100 hover:bg-sky-200 text-deepblue font-heading px-4 py-2 rounded-2xl text-xs font-bold border border-sky-300 transition flex items-center space-x-1 z-20">
+                    <span>⬅ Back to Mission Map</span>
+                </button>
+
+                <!-- GAME 1: POP THE BALLOONS -->
+                <div id="game-m1" class="hidden space-y-6">
+                    <div class="text-center space-y-1">
+                        <span class="bg-rose-100 text-rose-700 font-heading text-xs font-bold px-3 py-1 rounded-full uppercase">Mission 1 • Round <span id="m1-round">1</span>/6</span>
+                        <h3 class="text-2xl sm:text-3xl font-heading font-black text-deepblue">🎈 Listen & Pop the Balloon!</h3>
+                        <div class="pt-2">
+                            <a href="https://wordwall.net/es/resource/124259154?wwmethod=link" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-300 font-heading font-bold px-4 py-1.5 rounded-full text-xs transition shadow-sm">
+                                <span>🎈 Practice More on Wordwall! 🚀</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center my-4">
+                        <button onclick="playM1Audio()" class="bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-cloudwhite font-heading font-bold px-8 py-4 rounded-full text-xl shadow-xl flex items-center space-x-3 transform hover:scale-105 transition border-4 border-cloudwhite">
+                            <span class="text-3xl">🔊</span> <span>Listen to Nico</span>
+                        </button>
+                    </div>
+
+                    <div id="m1-balloons-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6"></div>
+                    <div id="m1-feedback" class="hidden p-4 rounded-2xl text-center font-heading font-bold text-base"></div>
+                </div>
+
+                <!-- GAME 2: TREASURE CHEST -->
+                <div id="game-m2" class="hidden space-y-6">
+                    <div class="text-center space-y-1">
+                        <span class="bg-amber-100 text-amber-800 font-heading text-xs font-bold px-3 py-1 rounded-full uppercase">Mission 2 • Round <span id="m2-round">1</span>/6</span>
+                        <h3 class="text-2xl sm:text-3xl font-heading font-black text-deepblue">💎 Read the Clue & Unlock the Chest!</h3>
+                        <div class="pt-2">
+                            <a href="https://es.educaplay.com/recursos-educativos/31618423-mission_2_treasure_chest.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 font-heading font-bold px-4 py-1.5 rounded-full text-xs transition shadow-sm">
+                                <span>💎 Practice More on Educaplay! 🚀</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 border-4 border-amber-300 rounded-3xl p-6 text-center max-w-lg mx-auto shadow-lg space-y-2">
+                        <span class="text-xs font-bold text-amber-700 uppercase tracking-widest block">📜 Island Pirate Map Clue</span>
+                        <h4 id="m2-clue-text" class="text-3xl sm:text-4xl font-heading font-black text-rose-600 capitalize">"thirty-five"</h4>
+                    </div>
+
+                    <div id="m2-chests-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4"></div>
+                    <div id="m2-feedback" class="hidden p-4 rounded-2xl text-center font-heading font-bold text-base"></div>
+                </div>
+
+                <!-- GAME 3: SECRET CODE LAB -->
+                <div id="game-m3" class="hidden space-y-6">
+                    <div class="text-center space-y-1">
+                        <span class="bg-emerald-100 text-emerald-800 font-heading text-xs font-bold px-3 py-1 rounded-full uppercase">Mission 3 • Round <span id="m3-round">1</span>/6</span>
+                        <h3 class="text-2xl sm:text-3xl font-heading font-black text-deepblue">🔐 Secret Code Lab</h3>
+                        <div class="pt-2">
+                            <a href="https://view.genially.com/6b01ab6a728f59ea93a542d0" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 font-heading font-bold px-4 py-1.5 rounded-full text-xs transition shadow-sm">
+                                <span>🔐 Practice More on Genially! 🚀</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-emerald-50 border-4 border-emerald-200 rounded-3xl p-6 max-w-md mx-auto space-y-4 text-center shadow-lg">
+                        <div class="inline-block bg-cloudwhite border-4 border-emerald-400 px-8 py-3 rounded-2xl shadow-inner">
+                            <span class="text-xs text-slate-400 block font-bold uppercase">TARGET NUMERAL</span>
+                            <span id="m3-numeral-display" class="text-5xl font-heading font-black text-deepblue">42</span>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="m3-input" class="text-xs text-slate-600 block font-bold">Type the word in English:</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="m3-input" placeholder="e.g. forty-two" autocomplete="off"
+                                       class="w-full bg-cloudwhite border-3 border-emerald-300 text-deepblue font-heading text-center text-2xl py-3 rounded-2xl outline-none focus:border-coralpink transition shadow-inner">
+                                <button onclick="insertM3Hyphen()" class="bg-sunyellow hover:bg-amber-400 text-amber-950 font-heading font-bold px-4 rounded-2xl text-xl shadow" title="Insert hyphen (-)">-</button>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-2">
+                            <button onclick="checkM3Answer()" class="flex-grow bg-emeraldgreen hover:bg-emerald-600 text-cloudwhite font-heading font-bold py-3.5 rounded-2xl shadow-lg transition text-base">
+                                🔓 Submit Code
+                            </button>
+                            <button onclick="getM3Hint()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-4 py-3.5 rounded-2xl text-xs font-heading font-bold transition">
+                                💡 Hint
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="m3-feedback" class="hidden p-4 rounded-2xl text-center font-heading font-bold text-base max-w-md mx-auto"></div>
+                </div>
+
+                <!-- GAME 4: ECHO CAVE (ALWAYS VISIBLE PROMINENT MIC BUTTON & SIMULATOR) -->
+                <div id="game-m4" class="hidden space-y-6">
+                    
+                    <div class="text-center space-y-1">
+                        <div class="flex items-center justify-center space-x-2">
+                            <span class="bg-purple-100 text-purple-800 font-heading text-xs font-bold px-3 py-1 rounded-full uppercase">Mission 4 • Round <span id="m4-round">1</span>/6</span>
+                            <span id="m4-mode-badge" class="bg-amber-100 text-amber-900 font-heading text-xs font-bold px-3 py-1 rounded-full uppercase">Phase 1: Silly Voice Repeater</span>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-heading font-black text-deepblue">🎙️ Echo Cave Real Speaking Studio</h3>
+                    </div>
+
+                    <!-- Silly Voice Mode Selector -->
+                    <div id="m4-voice-selector-box" class="space-y-2 max-w-xl mx-auto">
+                        <span class="text-xs font-bold text-purple-900 uppercase tracking-wider block text-center">1. Choose a Character Echo Voice:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <button onclick="setVoiceMode('robot')" id="vbtn-robot" class="voice-btn bg-purple-600 text-cloudwhite p-3 rounded-2xl text-xs font-heading font-bold border-2 border-purple-700 flex flex-col items-center gap-1 shadow">
+                                <span class="text-2xl">🤖</span> <span>Robot Voice</span>
+                            </button>
+                            <button onclick="setVoiceMode('mouse')" id="vbtn-mouse" class="voice-btn bg-cloudwhite text-deepblue p-3 rounded-2xl text-xs font-heading font-bold border-2 border-purple-200 flex flex-col items-center gap-1 hover:bg-purple-100">
+                                <span class="text-2xl">🐭</span> <span>Tiny Mouse</span>
+                            </button>
+                            <button onclick="setVoiceMode('giant')" id="vbtn-giant" class="voice-btn bg-cloudwhite text-deepblue p-3 rounded-2xl text-xs font-heading font-bold border-2 border-purple-200 flex flex-col items-center gap-1 hover:bg-purple-100">
+                                <span class="text-2xl">🦁</span> <span>Giant Voice</span>
+                            </button>
+                            <button onclick="setVoiceMode('whisper')" id="vbtn-whisper" class="voice-btn bg-cloudwhite text-deepblue p-3 rounded-2xl text-xs font-heading font-bold border-2 border-purple-200 flex flex-col items-center gap-1 hover:bg-purple-100">
+                                <span class="text-2xl">🤫</span> <span>Whisper</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Target Card -->
+                    <div class="text-center space-y-3 bg-cloudwhite p-6 rounded-3xl border-4 border-purple-300 shadow-inner max-w-xl mx-auto relative overflow-hidden">
+                        <span id="m4-prompt-category" class="text-xs text-purple-600 font-bold uppercase tracking-wider block">Target Pronunciation</span>
+                        <div id="m4-target-number" class="text-6xl font-heading font-black text-coralpink drop-shadow">14</div>
+                        <div id="m4-target-word" class="text-2xl font-heading font-bold text-deepblue capitalize">fourteen</div>
+                        
+                        <div id="m4-realtalk-visual" class="hidden flex flex-wrap justify-center gap-1 bg-amber-50 p-3 rounded-2xl border border-amber-200 max-h-28 overflow-y-auto"></div>
+
+                        <div>
+                            <button onclick="playM4Audio()" class="bg-coralpink hover:bg-rose-500 text-cloudwhite text-sm font-heading font-bold px-6 py-2 rounded-full shadow-md transition inline-flex items-center space-x-2">
+                                <span>🔊 Listen to Model (<span id="m4-voice-name">Robot</span>)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PROMINENT ALWAYS-VISIBLE "PRESS TO SPEAK" MIC ZONE -->
+                    <div class="bg-gradient-to-b from-purple-50 to-indigo-50 p-6 rounded-3xl border-4 border-purple-400 space-y-5 text-center shadow-xl max-w-xl mx-auto">
+                        
+                        <div class="space-y-1">
+                            <span class="text-xs font-black text-purple-900 uppercase tracking-widest block">2. SPEAKING INTERACTION:</span>
+                            <p class="text-xs text-slate-600 font-bold">Press the big microphone button below and speak out loud!</p>
+                        </div>
+
+                        <!-- Giant Unmissable Mic Button -->
+                        <div class="flex flex-col items-center justify-center space-y-3">
+                            <div class="relative">
+                                <div id="mic-pulse-ring" class="hidden absolute inset-0 rounded-full bg-rose-400 pulse-ring-active"></div>
+                                <button onclick="toggleRealSpeechRecognition()" id="real-mic-btn" 
+                                        class="relative z-10 w-28 h-28 bg-gradient-to-tr from-rose-500 via-coralpink to-pink-500 hover:scale-105 text-cloudwhite rounded-full border-4 border-cloudwhite shadow-2xl flex flex-col items-center justify-center transform transition duration-300 active:scale-95 cursor-pointer">
+                                    <span class="text-4xl drop-shadow">🎤</span>
+                                    <span class="text-[10px] font-heading font-black uppercase tracking-wider text-sunyellow">PRESS TO SPEAK</span>
+                                </button>
+                            </div>
+                            <span id="real-mic-label" class="font-heading font-black text-purple-950 text-lg">Click Mic to Talk!</span>
+                        </div>
+
+                        <!-- Live Waveform Indicator -->
+                        <div id="mic-audio-waves" class="hidden flex justify-center items-center space-x-1.5 h-8">
+                            <div class="mic-bar"></div>
+                            <div class="mic-bar"></div>
+                            <div class="mic-bar"></div>
+                            <div class="mic-bar"></div>
+                            <div class="mic-bar"></div>
+                        </div>
+
+                        <!-- Live Transcript Display -->
+                        <div class="bg-cloudwhite p-3 rounded-2xl border-2 border-purple-200 text-sm font-semibold shadow-inner">
+                            <span class="text-xs text-purple-600 font-bold block uppercase">Nico Heard (Speech Recognition):</span>
+                            <span id="nico-transcript" class="font-heading font-bold text-deepblue text-lg italic">"...Press mic and talk!"</span>
+                        </div>
+
+                        <!-- FAILSAFE / DEMO VOICE CHIPS (Always active for testing/sandbox previews!) -->
+                        <div class="border-t border-purple-200 pt-3 space-y-2">
+                            <span class="text-[11px] font-bold text-slate-600 uppercase block">Instant Voice Simulation (If mic blocked or for testing):</span>
+                            <div id="m4-sim-chips" class="flex flex-wrap justify-center gap-2">
+                                <!-- Dynamic chips populated per round -->
+                            </div>
+                        </div>
+
+                        <!-- Audio Recorder (MediaRecorder) -->
+                        <div class="border-t border-purple-200 pt-3 space-y-2">
+                            <span class="text-[11px] font-bold text-slate-600 uppercase block">Record & Hear Your Own Voice Clip:</span>
+                            <div class="flex flex-wrap justify-center gap-2">
+                                <button onclick="toggleMyVoiceRecording()" id="rec-voice-btn" class="bg-amber-100 hover:bg-amber-200 text-amber-950 border border-amber-300 font-heading font-bold text-xs px-4 py-2 rounded-xl flex items-center space-x-1 transition">
+                                    <span>🔴 Record My Voice</span>
+                                </button>
+                                <button onclick="playMyRecordedVoice()" id="play-voice-btn" disabled class="bg-slate-100 text-slate-400 border border-slate-300 font-heading font-bold text-xs px-4 py-2 rounded-xl flex items-center space-x-1 transition cursor-not-allowed">
+                                    <span>▶️ Hear My Voice</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Self-Check Fallback -->
+                        <div>
+                            <button onclick="simulateVoiceInput(state.missions[4].word)" class="text-xs text-slate-500 underline hover:text-deepblue font-bold">
+                                🚫 Self-Check ("I said it out loud!")
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div id="m4-feedback" class="hidden p-4 rounded-2xl text-center font-heading font-bold text-base max-w-xl mx-auto"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===================================================================
+             SECTION 4: REAL TALK (CLT DIALOGUES)
+             =================================================================== -->
+        <section id="section-realtalk" class="hidden space-y-6">
+            <div class="bg-cloudwhite rounded-3xl p-6 border-4 border-emerald-300 shadow-xl space-y-6">
+                <div class="border-b border-emerald-100 pb-4">
+                    <span class="bg-emerald-100 text-emerald-800 font-heading text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-emerald-200">
+                        Section 4 • Communicative Practice (CLT)
+                    </span>
+                    <h2 class="text-3xl font-heading font-black text-deepblue mt-2">
+                        🗣️ Real Talk: Exchanging Information with Friends!
+                    </h2>
+                    <p class="text-slate-600 font-semibold text-sm mt-1">
+                        Numbers help us share our age, count items, and give phone numbers! Practice talking with Nico & Maya!
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Scenario 1 -->
+                    <div class="bg-emerald-50 border-2 border-emerald-200 rounded-3xl p-5 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Scenario 1 • Asking About Age</span>
+                            <button onclick="playDialogueAudio('How old are you?', 'I am nine years old.')" class="bg-emeraldgreen hover:bg-emerald-600 text-cloudwhite text-xs font-heading font-bold px-3 py-1.5 rounded-full flex items-center space-x-1 shadow">
+                                <span>🔊 Listen Scene</span>
+                            </button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-12 h-12 bg-coralpink rounded-2xl flex items-center justify-center text-2xl shadow flex-shrink-0 text-cloudwhite font-heading font-bold">👧</div>
+                                <div class="bg-cloudwhite p-4 rounded-2xl rounded-tl-none border border-emerald-200 text-sm text-deepblue max-w-md shadow-sm">
+                                    <span class="font-bold text-coralpink block text-xs">Maya asks:</span>
+                                    "How old are you?"
+                                </div>
+                            </div>
+                            <div class="ml-10 sm:ml-14 space-y-2">
+                                <span class="text-xs text-slate-500 font-bold block">Select your answer:</span>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    <button onclick="checkDialogueChoice(this, true, 'Great job! Exchanging ages uses numbers naturally!')" class="bg-cloudwhite hover:bg-emerald-100 border-2 border-emerald-300 text-left p-3 rounded-xl text-xs font-bold text-deepblue transition">
+                                        A) "I am nine years old." ✅
+                                    </button>
+                                    <button onclick="checkDialogueChoice(this, false, 'Remember: for age we say years old!')" class="bg-cloudwhite hover:bg-emerald-100 border-2 border-emerald-300 text-left p-3 rounded-xl text-xs font-bold text-deepblue transition">
+                                        B) "I have nine numbers."
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scenario 2 -->
+                    <div class="bg-amber-50 border-2 border-amber-200 rounded-3xl p-5 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-amber-800 uppercase tracking-wider">Scenario 2 • Counting Stars</span>
+                            <button onclick="playDialogueAudio('How many stars are on the map?', 'There are nineteen stars!')" class="bg-sunyellow hover:bg-amber-400 text-amber-950 text-xs font-heading font-bold px-3 py-1.5 rounded-full flex items-center space-x-1 shadow">
+                                <span>🔊 Listen Scene</span>
+                            </button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-12 h-12 bg-sunyellow rounded-2xl flex items-center justify-center text-2xl shadow flex-shrink-0 text-amber-950 font-heading font-bold">🤖</div>
+                                <div class="bg-cloudwhite p-4 rounded-2xl rounded-tl-none border border-amber-200 text-sm text-deepblue max-w-md shadow-sm">
+                                    <span class="font-bold text-amber-700 block text-xs">Nico asks:</span>
+                                    "How many stars are on the island map?"
+                                </div>
+                            </div>
+                            <div class="ml-10 sm:ml-14 space-y-2">
+                                <span class="text-xs text-slate-500 font-bold block">Select your answer:</span>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    <button onclick="checkDialogueChoice(this, true, 'Spot on! There are nineteen stars!')" class="bg-cloudwhite hover:bg-amber-100 border-2 border-amber-300 text-left p-3 rounded-xl text-xs font-bold text-deepblue transition">
+                                        A) "There are nineteen (19) stars." ✅
+                                    </button>
+                                    <button onclick="checkDialogueChoice(this, false, 'Ninety means 90! 19 is nineteen!')" class="bg-cloudwhite hover:bg-amber-100 border-2 border-amber-300 text-left p-3 rounded-xl text-xs font-bold text-deepblue transition">
+                                        B) "There are ninety (90) stars."
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================
+             SECTION 5: EXPLORER CERTIFICATE
+             =================================================================== -->
+        <section id="section-certificate" class="hidden space-y-6">
+            <div class="text-center space-y-2 no-print">
+                <h2 class="text-3xl font-heading font-black text-deepblue">🏆 Explorer Certificate of Excellence</h2>
+                <p class="text-slate-600 text-sm font-semibold max-w-lg mx-auto">
+                    You helped Nico recover all numbers from 1 to 50! Print or save your certificate!
+                </p>
+                <button onclick="window.print()" class="bg-coralpink hover:bg-rose-600 text-cloudwhite font-heading font-bold px-8 py-3 rounded-full shadow-xl transition inline-flex items-center space-x-2 text-base border-2 border-cloudwhite">
+                    <span>🖨️ Print Certificate</span>
+                </button>
+            </div>
+
+            <!-- Printable Canvas -->
+            <div id="printable-certificate" class="bg-cloudwhite text-deepblue border-8 border-purple-600 rounded-3xl p-8 sm:p-12 shadow-2xl max-w-3xl mx-auto space-y-8 relative overflow-hidden">
+                <div class="absolute top-3 left-3 text-3xl">⭐</div>
+                <div class="absolute top-3 right-3 text-3xl">⭐</div>
+                <div class="absolute bottom-3 left-3 text-3xl">⭐</div>
+                <div class="absolute bottom-3 right-3 text-3xl">⭐</div>
+
+                <div class="text-center space-y-2 border-b-4 border-purple-200 pb-6">
+                    <span class="bg-purple-100 text-purple-900 font-heading text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest border border-purple-300">
+                        LabINNOVA • Innovation & Excellence Laboratory
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-heading font-black text-purple-900 tracking-tight">
+                        CERTIFICATE OF ACHIEVEMENT
+                    </h1>
+                    <p class="text-xs sm:text-sm font-bold text-purple-700 uppercase tracking-widest">
+                        Number Quest 1–50: Adventure with Numbers
+                    </p>
+                </div>
+
+                <div class="text-center space-y-4 py-4">
+                    <p class="text-sm font-semibold text-slate-600 italic">This official award is proudly presented to:</p>
+                    <h2 id="cert-name" class="text-4xl sm:text-6xl font-heading font-black text-coralpink underline decoration-sunyellow decoration-4 capitalize">
+                        Super Student
+                    </h2>
+                    <p class="text-sm font-semibold text-slate-700 max-w-lg mx-auto leading-relaxed">
+                        for successfully identifying, pronouncing, reading, and writing English numbers from 1 to 50, completing all 4 island missions with excellence!
+                    </p>
+
+                    <div class="flex items-center justify-center space-x-6 pt-4">
+                        <div class="bg-sunyellow text-amber-950 p-4 rounded-2xl text-center border-2 border-amber-400 shadow">
+                            <span class="text-[10px] text-amber-900 font-bold uppercase block">Total Stars Earned</span>
+                            <span id="cert-stars" class="text-3xl font-heading font-black">0</span> ⭐
+                        </div>
+                        <div class="bg-sky-100 text-deepblue p-4 rounded-2xl text-center border-2 border-sky-300 shadow">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block">Target Audience</span>
+                            <span class="text-lg font-heading font-bold text-deepblue">Grade 3 • Level A1/A2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-slate-200 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
+                    <div class="space-y-1 text-center sm:text-left">
+                        <p class="font-bold text-deepblue">Educational Design Authors (LabINNOVA):</p>
+                        <p>Deisy T. Martinez V. • Derly X. Cruz S.</p>
+                        <p>Diana P. Palencia A. • Angie V. Soche S. • Karen X. Arcos G.</p>
+                    </div>
+                    <div class="text-center sm:text-right space-y-1">
+                        <p class="font-bold text-deepblue">Course & Support Teacher:</p>
+                        <p>Testing And Evaluation In ELT</p>
+                        <p>Support Teacher: Flor Marina Manrique S.</p>
+                        <p id="cert-date" class="text-[10px] text-slate-400 font-mono mt-1">Date: 2026-11-21</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-cloudwhite border-t-4 border-sky-200 py-6 px-4 text-center text-xs text-slate-500 space-y-1 no-print">
+        <p class="font-bold text-deepblue">Number Quest 1–50: Adventure with Numbers • LABINNOVA Educational Resource</p>
+        <p>Licenciatura en Lenguas Extranjeras con Énfasis en Inglés • Grade 3 Level A1/A2</p>
+    </footer>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        /* ==========================================================================
+           STATE & DICTIONARY
+           ========================================================================== */
+        const state = {
+            explorerName: 'Super Student',
+            stars: 0,
+            currentSection: 'explore',
+            voiceSpeed: 1.0,
+            chantInterval: null,
+            voiceMode: 'robot',
+            activeRange: 'all',
+            speechRecInstance: null,
+            isListening: false,
+            mediaRecorder: null,
+            audioChunks: [],
+            recordedVoiceUrl: null,
+            missions: {
+                1: { round: 1, maxRounds: 6, target: 0, options: [] },
+                2: { round: 1, maxRounds: 6, target: 0, clue: '', options: [] },
+                3: { round: 1, maxRounds: 6, target: 0, word: '' },
+                4: { round: 1, maxRounds: 6, target: 0, word: '', phrase: '', isRealTalk: false }
+            }
+        };
+
+        const numberWordsMap = {
+            1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
+            6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten",
+            11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen", 15: "fifteen",
+            16: "sixteen", 17: "seventeen", 18: "eighteen", 19: "nineteen", 20: "twenty",
+            21: "twenty-one", 22: "twenty-two", 23: "twenty-three", 24: "twenty-four", 25: "twenty-five",
+            26: "twenty-six", 27: "twenty-seven", 28: "twenty-eight", 29: "twenty-nine", 30: "thirty",
+            31: "thirty-one", 32: "thirty-two", 33: "thirty-three", 34: "thirty-four", 35: "thirty-five",
+            36: "thirty-six", 37: "thirty-seven", 38: "thirty-eight", 39: "thirty-nine", 40: "forty",
+            41: "forty-one", 42: "forty-two", 43: "forty-three", 44: "forty-four", 45: "forty-five",
+            46: "forty-six", 47: "forty-seven", 48: "forty-eight", 49: "forty-nine", 50: "fifty"
+        };
+
+        const visualIcons = ['🎈', '⭐', '💎', '🍎', '🤖', '🚗', '🚀', '🐱', '🍦'];
+
+        /* ==========================================================================
+           AUDIO SYNTHESIS & SPEECH ENGINE
+           ========================================================================== */
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtxInstance = null;
+
+        function getAudioContext() {
+            if (!audioCtxInstance) audioCtxInstance = new AudioCtx();
+            if (audioCtxInstance.state === 'suspended') audioCtxInstance.resume();
+            return audioCtxInstance;
+        }
+
+        function playSound(type) {
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+
+                if (type === 'click') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(500, now);
+                    osc.frequency.exponentialRampToValueAtTime(250, now + 0.05);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.linearRampToValueAtTime(0, now + 0.05);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.05);
+                } else if (type === 'pop') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(250, now);
+                    osc.frequency.exponentialRampToValueAtTime(750, now + 0.08);
+                    gain.gain.setValueAtTime(0.3, now);
+                    gain.gain.linearRampToValueAtTime(0, now + 0.08);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } else if (type === 'win') {
+                    const notes = [523.25, 659.25, 783.99, 1046.50];
+                    notes.forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+                        gain.gain.setValueAtTime(0.2, now + idx * 0.08);
+                        gain.gain.linearRampToValueAtTime(0, now + idx * 0.08 + 0.2);
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.start(now + idx * 0.08);
+                        osc.stop(now + idx * 0.08 + 0.2);
+                    });
+                } else if (type === 'wrong') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(200, now);
+                    osc.frequency.linearRampToValueAtTime(120, now + 0.25);
+                    gain.gain.setValueAtTime(0.25, now);
+                    gain.gain.linearRampToValueAtTime(0, now + 0.25);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                }
+            } catch (e){}
+        }
+
+        function speakText(text, customRate = null, customPitch = 1.0) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+
+                // Clean text for speech synthesis engine so it speaks natural English words without hyphens or literal dashes
+                let cleanText = text
+                    .replace(/thir-TEEN/gi, "thirteen")
+                    .replace(/THIR-ty/gi, "thirty")
+                    .replace(/four-TEEN/gi, "fourteen")
+                    .replace(/FOR-ty/gi, "forty")
+                    .replace(/fif-TEEN/gi, "fifteen")
+                    .replace(/FIF-ty/gi, "fifty")
+                    .replace(/-/g, " "); // Convert any hyphens (e.g. twenty-one -> twenty one) into a space for smooth natural pronunciation
+
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.lang = 'en-US';
+                utterance.rate = customRate || state.voiceSpeed;
+                utterance.pitch = customPitch;
+
+                const indicator = document.getElementById('nico-speaking-indicator');
+                if (indicator) indicator.classList.remove('hidden');
+
+                utterance.onend = () => { if (indicator) indicator.classList.add('hidden'); };
+                utterance.onerror = () => { if (indicator) indicator.classList.add('hidden'); };
+
+                const voices = window.speechSynthesis.getVoices();
+                const enVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Samantha')));
+                if (enVoice) utterance.voice = enVoice;
+
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function speakMinimalPair(word1, word2) {
+            playSound('click');
+            speakText(`${word1} ... ${word2}`, 0.85);
+        }
+
+        function testAudioVoice() {
+            playSound('win');
+            speakText(`Hello ${state.explorerName}! Welcome to Number Quest 1 to 50!`);
+        }
+
+        function toggleVoiceSpeed() {
+            playSound('click');
+            const btn = document.getElementById('speed-toggle-btn');
+            if (state.voiceSpeed === 1.0) {
+                state.voiceSpeed = 0.7;
+                btn.innerHTML = `<span>🐢 Slow Speed (0.7x)</span>`;
+                btn.className = "bg-amber-100 text-amber-900 border border-amber-300 font-heading font-bold text-xs px-3 py-1.5 rounded-xl flex items-center space-x-1 shadow-sm";
+                speakText("Slow voice speed activated!");
+            } else {
+                state.voiceSpeed = 1.0;
+                btn.innerHTML = `<span>🚀 Normal Speed (1.0x)</span>`;
+                btn.className = "bg-purple-100 text-purple-900 border border-purple-300 font-heading font-bold text-xs px-3 py-1.5 rounded-xl flex items-center space-x-1 shadow-sm";
+                speakText("Normal voice speed activated!");
+            }
+        }
+
+        /* ==========================================================================
+           NAVIGATION & UI HELPERS
+           ========================================================================== */
+        function switchSection(secId) {
+            playSound('click');
+            stopChant();
+            stopSpeechRecognition();
+            state.currentSection = secId;
+
+            ['explore', 'teen-ty', 'missions', 'realtalk', 'certificate'].forEach(id => {
+                const el = document.getElementById(`section-${id}`);
+                const btn = document.getElementById(`nav-btn-${id}`);
+                if (el) el.classList.add('hidden');
+                if (btn) {
+                    btn.classList.remove('bg-coralpink', 'text-cloudwhite');
+                    btn.classList.add('bg-sky-200', 'text-deepblue');
+                }
+            });
+
+            const targetEl = document.getElementById(`section-${secId}`);
+            const targetBtn = document.getElementById(`nav-btn-${secId}`);
+            if (targetEl) targetEl.classList.remove('hidden');
+            if (targetBtn) {
+                targetBtn.classList.remove('bg-sky-200', 'text-deepblue');
+                targetBtn.classList.add('bg-coralpink', 'text-cloudwhite');
+            }
+
+            if (secId === 'certificate') updateCertificateView();
+        }
+
+        function updateExplorerName(val) {
+            state.explorerName = val.trim() || 'Super Student';
+            const certName = document.getElementById('cert-name');
+            if (certName) certName.innerText = state.explorerName;
+        }
+
+        function addStars(num) {
+            state.stars += num;
+            document.getElementById('star-count').innerText = state.stars;
+            document.getElementById('cert-stars').innerText = state.stars;
+        }
+
+        /* ==========================================================================
+           1–50 GRID & FLASHCARDS
+           ========================================================================== */
+        function buildNumberGrid() {
+            const grid = document.getElementById('number-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const bgColors = [
+                'bg-rose-100 border-rose-300 text-rose-900 hover:bg-rose-200',
+                'bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200',
+                'bg-emerald-100 border-emerald-300 text-emerald-950 hover:bg-emerald-200',
+                'bg-sky-100 border-sky-300 text-sky-950 hover:bg-sky-200',
+                'bg-purple-100 border-purple-300 text-purple-950 hover:bg-purple-200'
+            ];
+
+            for (let i = 1; i <= 50; i++) {
+                const card = document.createElement('button');
+                card.id = `grid-num-${i}`;
+                const colorClass = bgColors[(i - 1) % bgColors.length];
+                card.className = `${colorClass} border-2 rounded-2xl p-2 sm:p-3 text-center transition flex flex-col items-center justify-center space-y-1 group transform hover:scale-105 shadow-sm`;
+                
+                const word = numberWordsMap[i];
+                card.onclick = () => openFlashcard(i);
+
+                card.innerHTML = `
+                    <span class="text-2xl sm:text-3xl font-heading font-black group-hover:scale-110 transition-transform">${i}</span>
+                    <span class="text-[10px] sm:text-xs font-bold truncate max-w-full capitalize">${word}</span>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        function filterNumberRange(range) {
+            playSound('click');
+            state.activeRange = range;
+
+            document.querySelectorAll('.range-btn').forEach(btn => {
+                btn.classList.remove('bg-coralpink', 'text-cloudwhite');
+                btn.classList.add('bg-sky-100', 'text-deepblue');
+            });
+
+            const activeBtn = document.getElementById(`range-btn-${range}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-sky-100', 'text-deepblue');
+                activeBtn.classList.add('bg-coralpink', 'text-cloudwhite');
+            }
+
+            let start = 1, end = 50;
+            if (range === '1-10') { start = 1; end = 10; }
+            else if (range === '11-20') { start = 11; end = 20; }
+            else if (range === '21-30') { start = 21; end = 30; }
+            else if (range === '31-40') { start = 31; end = 40; }
+            else if (range === '41-50') { start = 41; end = 50; }
+
+            for (let i = 1; i <= 50; i++) {
+                const card = document.getElementById(`grid-num-${i}`);
+                if (card) {
+                    if (i >= start && i <= end) card.classList.remove('hidden');
+                    else card.classList.add('hidden');
+                }
+            }
+        }
+
+        function openFlashcard(num) {
+            playSound('pop');
+            const word = numberWordsMap[num];
+            speakText(`${num}. ${word}`);
+
+            const modal = document.getElementById('flashcard-modal');
+            document.getElementById('fc-numeral').innerText = num;
+            document.getElementById('fc-word').innerText = word;
+            document.getElementById('fc-audio-btn').onclick = () => speakText(`${num}. ${word}`);
+
+            const hyphenNote = document.getElementById('fc-hyphen-note');
+            if (num > 20 && num % 10 !== 0) {
+                hyphenNote.innerText = `💡 Grammar Tip: Put a hyphen (-) in "${word}"!`;
+            } else if (num === 13 || num === 15 || num === 40) {
+                hyphenNote.innerText = `💡 Spelling Tip: Watch how "${word}" is spelled!`;
+            } else {
+                hyphenNote.innerText = `✨ Number ${num} on Number Island!`;
+            }
+
+            const itemsContainer = document.getElementById('fc-items-grid');
+            document.getElementById('fc-quantity-label').innerText = `Visual Quantity (${num} items):`;
+            itemsContainer.innerHTML = '';
+
+            const icon = visualIcons[num % visualIcons.length];
+            for (let i = 0; i < num; i++) {
+                const span = document.createElement('span');
+                span.className = 'text-xl';
+                span.innerText = icon;
+                itemsContainer.appendChild(span);
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeFlashcard() {
+            playSound('click');
+            document.getElementById('flashcard-modal').classList.add('hidden');
+        }
+
+        function startChant(step) {
+            stopChant();
+            let current = step;
+            playSound('pop');
+
+            state.chantInterval = setInterval(() => {
+                if (current > 50) {
+                    stopChant();
+                    return;
+                }
+
+                for (let i = 1; i <= 50; i++) {
+                    const btn = document.getElementById(`grid-num-${i}`);
+                    if (btn) btn.classList.remove('ring-4', 'ring-sunyellow', 'scale-110');
+                }
+
+                const activeBtn = document.getElementById(`grid-num-${current}`);
+                if (activeBtn) {
+                    activeBtn.classList.add('ring-4', 'ring-sunyellow', 'scale-110');
+                    activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+
+                speakText(`${current}`);
+                current += step;
+            }, 1200);
+        }
+
+        function stopChant() {
+            if (state.chantInterval) {
+                clearInterval(state.chantInterval);
+                state.chantInterval = null;
+            }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            for (let i = 1; i <= 50; i++) {
+                const btn = document.getElementById(`grid-num-${i}`);
+                if (btn) btn.classList.remove('ring-4', 'ring-sunyellow', 'scale-110');
+            }
+        }
+
+        /* ==========================================================================
+           MISSIONS ENGINE
+           ========================================================================== */
+        function startMission(mId) {
+            playSound('click');
+            document.getElementById('mission-hub').classList.add('hidden');
+            const gameContainer = document.getElementById('game-container');
+            gameContainer.classList.remove('hidden');
+
+            [1, 2, 3, 4].forEach(id => {
+                const el = document.getElementById(`game-m${id}`);
+                if (el) el.classList.add('hidden');
+            });
+
+            document.getElementById(`game-m${mId}`).classList.remove('hidden');
+            state.missions[mId].round = 1;
+            loadMissionRound(mId);
+        }
+
+        function backToMissionHub() {
+            playSound('click');
+            stopSpeechRecognition();
+            document.getElementById('game-container').classList.add('hidden');
+            document.getElementById('mission-hub').classList.remove('hidden');
+        }
+
+        function loadMissionRound(mId) {
+            if (mId === 1) setupM1Round();
+            else if (mId === 2) setupM2Round();
+            else if (mId === 3) setupM3Round();
+            else if (mId === 4) setupM4Round();
+        }
+
+        /* MISSION 1: LISTENING */
+        const m1TargetsPool = [13, 30, 14, 40, 15, 50, 16, 26, 17, 37, 18, 8, 19, 9, 21, 12];
+        function setupM1Round() {
+            const m = state.missions[1];
+            document.getElementById('m1-round').innerText = m.round;
+            document.getElementById('m1-feedback').className = 'hidden';
+
+            const target = m1TargetsPool[Math.floor(Math.random() * m1TargetsPool.length)];
+            m.target = target;
+
+            let distractors = [target];
+            if (target === 13) distractors.push(30, 3, 33);
+            else if (target === 30) distractors.push(13, 3, 33);
+            else if (target === 14) distractors.push(40, 4, 24);
+            else if (target === 40) distractors.push(14, 4, 44);
+            else if (target === 15) distractors.push(50, 5, 25);
+            else if (target === 50) distractors.push(15, 5, 35);
+            else {
+                while (distractors.length < 4) {
+                    const rnd = Math.floor(Math.random() * 50) + 1;
+                    if (!distractors.includes(rnd)) distractors.push(rnd);
+                }
+            }
+            distractors.sort(() => Math.random() - 0.5);
+            m.options = distractors;
+
+            const grid = document.getElementById('m1-balloons-grid');
+            grid.innerHTML = '';
+            const colors = ['bg-gradient-to-t from-rose-500 to-pink-400', 'bg-gradient-to-t from-amber-400 to-yellow-300 text-amber-950', 'bg-gradient-to-t from-emerald-500 to-teal-400', 'bg-gradient-to-t from-purple-500 to-indigo-400'];
+
+            distractors.forEach((num, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `h-40 ${colors[idx % colors.length]} text-cloudwhite rounded-full border-4 border-cloudwhite shadow-xl flex flex-col items-center justify-center space-y-1 transform hover:scale-110 transition animate-float p-4 cursor-pointer`;
+                btn.onclick = () => checkM1Choice(num, btn);
+                btn.innerHTML = `<span class="text-3xl">🎈</span><span class="text-4xl font-heading font-black drop-shadow">${num}</span>`;
+                grid.appendChild(btn);
+            });
+
+            setTimeout(() => playM1Audio(), 400);
+        }
+
+        function playM1Audio() {
+            speakText(`Nico says: ${state.missions[1].target}!`);
+        }
+
+        function checkM1Choice(chosen, btn) {
+            const m = state.missions[1];
+            const feedback = document.getElementById('m1-feedback');
+            feedback.classList.remove('hidden');
+
+            if (chosen === m.target) {
+                playSound('pop'); playSound('win'); addStars(10);
+                btn.classList.add('opacity-0', 'scale-150');
+
+                feedback.className = 'p-4 rounded-2xl text-center font-bold text-base bg-emerald-100 text-emerald-900 border-2 border-emerald-300';
+                feedback.innerText = `🎉 Pop! Excellent! ${m.target} is correct! (+10 Stars)`;
+
+                setTimeout(() => {
+                    if (m.round < m.maxRounds) { m.round++; setupM1Round(); }
+                    else { feedback.innerText = `🏆 Mission 1 Completed! Balloon Champion!`; setTimeout(() => backToMissionHub(), 2000); }
+                }, 1500);
+            } else {
+                playSound('wrong');
+                feedback.className = 'p-4 rounded-2xl text-center font-bold text-base bg-rose-100 text-rose-900 border-2 border-rose-300';
+                feedback.innerText = `Oops! That was ${chosen}. Listen again for ${m.target}!`;
+                speakText(`Try again! Nico said ${m.target}`);
+            }
+        }
+
+        /* MISSION 2: READING */
+        function setupM2Round() {
+            const m = state.missions[2];
+            document.getElementById('m2-round').innerText = m.round;
+            document.getElementById('m2-feedback').className = 'hidden';
+
+            const target = Math.floor(Math.random() * 50) + 1;
+            m.target = target;
+            const clueWord = numberWordsMap[target];
+            m.clue = clueWord;
+            document.getElementById('m2-clue-text').innerText = `"${clueWord}"`;
+
+            let options = [target];
+            while (options.length < 4) {
+                const rnd = Math.floor(Math.random() * 50) + 1;
+                if (!options.includes(rnd)) options.push(rnd);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const grid = document.getElementById('m2-chests-grid');
+            grid.innerHTML = '';
+            options.forEach((num) => {
+                const btn = document.createElement('button');
+                btn.className = `bg-cloudwhite border-4 border-amber-300 rounded-3xl p-5 text-center shadow-lg hover:bg-amber-100 transition transform hover:scale-105 flex flex-col items-center space-y-2 cursor-pointer`;
+                btn.onclick = () => checkM2Choice(num, btn);
+                btn.innerHTML = `<span class="text-5xl">🧰</span><span class="text-xs font-bold text-amber-800 uppercase">Chest</span><span class="text-4xl font-heading font-black text-deepblue">${num}</span>`;
+                grid.appendChild(btn);
+            });
+        }
+
+        function checkM2Choice(chosen, btn) {
+            const m = state.missions[2];
+            const feedback = document.getElementById('m2-feedback');
+            feedback.classList.remove('hidden');
+
+            if (chosen === m.target) {
+                playSound('win'); addStars(10);
+                btn.innerHTML = `<span class="text-5xl">💎</span><span class="text-xs text-emerald-700 font-bold uppercase">OPENED!</span><span class="text-4xl font-heading font-black text-emerald-800">${chosen}</span>`;
+
+                feedback.className = 'p-4 rounded-2xl text-center font-bold text-base bg-emerald-100 text-emerald-900 border-2 border-emerald-300';
+                feedback.innerText = `💎 Treasure Chest Unlocked! "${m.clue}" = ${m.target}! (+10 Stars)`;
+
+                setTimeout(() => {
+                    if (m.round < m.maxRounds) { m.round++; setupM2Round(); }
+                    else { feedback.innerText = `🏆 Mission 2 Completed! Treasure Island Master!`; setTimeout(() => backToMissionHub(), 2000); }
+                }, 1500);
+            } else {
+                playSound('wrong');
+                feedback.className = 'p-4 rounded-2xl text-center font-bold text-base bg-rose-100 text-rose-900 border-2 border-rose-300';
+                feedback.innerText = `Oops! ${chosen} is written "${numberWordsMap[chosen]}". Read clue map again!`;
+            }
+        }
+
+        /* MISSION 3: WRITING */
+        function setupM3Round() {
+            const m = state.missions[3];
+            document.getElementById('m3-round').innerText = m.round;
+            document.getElementById('m3-feedback').className = 'hidden';
+            document.getElementById('m3-input').value = '';
+
+            const target = Math.floor(Math.random() * 50) + 1;
+            m.target = target;
+            m.word = numberWordsMap[target];
+            document.getElementById('m3-numeral-display').innerText = target;
+        }
+
+        function insertM3Hyphen() {
+            playSound('click');
+            const inp = document.getElementById('m3-input');
+            inp.value += '-';
+            inp.focus();
+        }
+
+        function getM3Hint() {
+            const m = state.missions[3];
+            const feedback = document.getElementById('m3-feedback');
+            feedback.classList.remove('hidden');
+            feedback.className = 'p-4 rounded-2xl text-center font-bold text-sm bg-amber-100 text-amber-950 border-2 border-amber-300';
+            feedback.innerText = `💡 Hint: Starts with "${m.word.substring(0, 3)}..."`;
+        }
+
+        function checkM3Answer() {
+            const m = state.missions[3];
+            const inputVal = document.getElementById('m3-input').value.trim().toLowerCase();
+            const feedback = document.getElementById('m3-feedback');
+            feedback.classList.remove('hidden');
+
+            if (inputVal === m.word) {
+                playSound('win'); addStars(10);
+                feedback.className = 'p-4 rounded-2xl text-center font-bold text-base bg-emerald-100 text-emerald-900 border-2 border-emerald-300';
+                feedback.innerText = `🔓 Code Unlocked! ${m.target} = "${m.word}"! (+10 Stars)`;
+
+                setTimeout(() => {
+                    if (m.round < m.maxRounds) { m.round++; setupM3Round(); }
+                    else { feedback.innerText = `🏆 Mission 3 Completed! Spy Code Breaker!`; setTimeout(() => backToMissionHub(), 2000); }
+                }, 1500);
+            } else {
+                playSound('wrong');
+                feedback.className = 'p-4 rounded-2xl text-center font-bold text-base bg-rose-100 text-rose-900 border-2 border-rose-300';
+                feedback.innerText = `Not quite. Correct spelling: "${m.word}". Try again!`;
+            }
+        }
+
+        /* ==========================================================================
+           MISSION 4: ECHO CAVE (ROBUST SPEAKING + SPEECH RECOGNITION + SIMULATOR CHIPS)
+           ========================================================================== */
+        const m4RoundsData = [
+            { target: 14, word: "fourteen", phrase: "", isRealTalk: false },
+            { target: 40, word: "forty", phrase: "", isRealTalk: false },
+            { target: 13, word: "thirteen", phrase: "", isRealTalk: false },
+            { target: 30, word: "thirty", phrase: "", isRealTalk: false },
+            { target: 27, word: "twenty-seven", phrase: "", isRealTalk: false },
+            { target: 19, word: "nineteen", phrase: "there are nineteen", isRealTalk: true }
+        ];
+
+        function setupM4Round() {
+            stopSpeechRecognition();
+            const m = state.missions[4];
+            document.getElementById('m4-round').innerText = m.round;
+            document.getElementById('m4-feedback').className = 'hidden';
+            document.getElementById('nico-transcript').innerText = `"...Press mic and talk!"`;
+
+            const currentData = m4RoundsData[(m.round - 1) % m4RoundsData.length];
+            m.target = currentData.target;
+            m.word = currentData.word;
+            m.phrase = currentData.phrase;
+            m.isRealTalk = currentData.isRealTalk;
+
+            const modeBadge = document.getElementById('m4-mode-badge');
+            const promptCategory = document.getElementById('m4-prompt-category');
+            const targetNum = document.getElementById('m4-target-number');
+            const targetWord = document.getElementById('m4-target-word');
+            const realTalkVisual = document.getElementById('m4-realtalk-visual');
+            const voiceSelectorBox = document.getElementById('m4-voice-selector-box');
+            const simChips = document.getElementById('m4-sim-chips');
+
+            // Setup Demo Simulator Chips
+            simChips.innerHTML = '';
+            const correctChipVal = m.isRealTalk ? 'there are nineteen' : m.word;
+            
+            const btnCorrect = document.createElement('button');
+            btnCorrect.className = "bg-emerald-100 hover:bg-emerald-200 text-emerald-950 border border-emerald-300 font-heading font-bold text-xs px-3 py-1.5 rounded-xl transition shadow-sm";
+            btnCorrect.onclick = () => simulateVoiceInput(correctChipVal);
+            btnCorrect.innerHTML = `🗣️ Say: "${correctChipVal}" ✅`;
+            simChips.appendChild(btnCorrect);
+
+            // Add distractor chips for minimal pair practice testing
+            if (m.target === 13) {
+                const btnWrong = document.createElement('button');
+                btnWrong.className = "bg-rose-100 hover:bg-rose-200 text-rose-950 border border-rose-300 font-heading font-bold text-xs px-3 py-1.5 rounded-xl transition";
+                btnWrong.onclick = () => simulateVoiceInput("thirty");
+                btnWrong.innerHTML = `🗣️ Say: "thirty" (Test 13 vs 30)`;
+                simChips.appendChild(btnWrong);
+            } else if (m.target === 30) {
+                const btnWrong = document.createElement('button');
+                btnWrong.className = "bg-rose-100 hover:bg-rose-200 text-rose-950 border border-rose-300 font-heading font-bold text-xs px-3 py-1.5 rounded-xl transition";
+                btnWrong.onclick = () => simulateVoiceInput("thirteen");
+                btnWrong.innerHTML = `🗣️ Say: "thirteen" (Test 30 vs 13)`;
+                simChips.appendChild(btnWrong);
+            }
+
+            if (m.isRealTalk) {
+                modeBadge.innerText = "Phase 2: Oral Real Talk Challenge";
+                promptCategory.innerText = "Nico asks: 'How many stars are on the map?'";
+                targetNum.innerText = `19 ⭐`;
+                targetWord.innerText = `Answer: "There are nineteen" or "Nineteen!"`;
+                voiceSelectorBox.classList.add('hidden');
+
+                realTalkVisual.classList.remove('hidden');
+                realTalkVisual.innerHTML = '';
+                for (let i = 0; i < 19; i++) {
+                    realTalkVisual.innerHTML += `<span class="text-xl">⭐</span>`;
+                }
+
+                speakText("How many stars are on the map?", 0.9);
+            } else {
+                modeBadge.innerText = `Phase 1: Silly Voice Repeater`;
+                promptCategory.innerText = `Target Pronunciation (Round ${m.round})`;
+                targetNum.innerText = m.target;
+                targetWord.innerText = m.word;
+                realTalkVisual.classList.add('hidden');
+                voiceSelectorBox.classList.remove('hidden');
+
+                playM4Audio();
+            }
+        }
+
+        function setVoiceMode(mode) {
+            playSound('click');
+            state.voiceMode = mode;
+            ['robot', 'mouse', 'giant', 'whisper'].forEach(m => {
+                const btn = document.getElementById(`vbtn-${m}`);
+                if (btn) btn.className = "voice-btn bg-cloudwhite text-deepblue p-3 rounded-2xl text-xs font-heading font-bold border-2 border-purple-200 flex flex-col items-center gap-1 hover:bg-purple-100";
+            });
+
+            const activeBtn = document.getElementById(`vbtn-${mode}`);
+            if (activeBtn) activeBtn.className = "voice-btn bg-purple-600 text-cloudwhite p-3 rounded-2xl text-xs font-heading font-bold border-2 border-purple-700 flex flex-col items-center gap-1 shadow";
+
+            document.getElementById('m4-voice-name').innerText = mode.charAt(0).toUpperCase() + mode.slice(1);
+            playM4Audio();
+        }
+
+        function playM4Audio() {
+            const m = state.missions[4];
+            let textToSpeak = m.isRealTalk ? "There are nineteen" : m.word;
+            let pitch = 1.0, rate = 0.9;
+
+            if (!m.isRealTalk) {
+                if (state.voiceMode === 'mouse') { pitch = 1.8; rate = 1.2; }
+                else if (state.voiceMode === 'giant') { pitch = 0.5; rate = 0.7; }
+                else if (state.voiceMode === 'whisper') { pitch = 0.9; rate = 0.6; }
+                else if (state.voiceMode === 'robot') { pitch = 1.0; rate = 0.8; }
+            }
+            speakText(textToSpeak, rate, pitch);
+        }
+
+        /* SPEECH RECOGNITION & SIMULATION CONTROLLER */
+        function toggleRealSpeechRecognition() {
+            playSound('click');
+            if (state.isListening) {
+                stopSpeechRecognition();
+                return;
+            }
+
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRec) {
+                document.getElementById('nico-transcript').innerText = "⚠️ Browser Sandbox restriction detected. Tap a voice chip below to simulate speaking!";
+                setMicActiveState(false);
+                return;
+            }
+
+            try {
+                const rec = new SpeechRec();
+                state.speechRecInstance = rec;
+                rec.lang = 'en-US';
+                rec.interimResults = false;
+                rec.maxAlternatives = 3;
+
+                setMicActiveState(true);
+
+                rec.onresult = (e) => {
+                    const transcript = e.results[0][0].transcript.toLowerCase().trim();
+                    document.getElementById('nico-transcript').innerText = `"${transcript}"`;
+                    evaluateSpokenAnswer(transcript);
+                };
+
+                rec.onerror = (err) => {
+                    console.log('Speech recognition error/blocked:', err);
+                    setMicActiveState(false);
+                    document.getElementById('nico-transcript').innerText = `Microphone access restricted. Tap a chip below to speak!`;
+                };
+
+                rec.onend = () => { setMicActiveState(false); };
+                rec.start();
+            } catch (err) {
+                console.log('Speech recognition catch error:', err);
+                setMicActiveState(false);
+                document.getElementById('nico-transcript').innerText = `Mic blocked by browser iframe. Tap a chip below to speak!`;
+            }
+        }
+
+        function setMicActiveState(active) {
+            state.isListening = active;
+            const micBtn = document.getElementById('real-mic-btn');
+            const micLabel = document.getElementById('real-mic-label');
+            const waves = document.getElementById('mic-audio-waves');
+            const ring = document.getElementById('mic-pulse-ring');
+
+            if (active) {
+                micLabel.innerText = "Listening... Speak Now!";
+                micLabel.className = "font-heading font-black text-rose-600 text-lg animate-pulse";
+                waves.classList.remove('hidden');
+                ring.classList.remove('hidden');
+                micBtn.classList.add('scale-110');
+            } else {
+                micLabel.innerText = "Click Mic to Talk!";
+                micLabel.className = "font-heading font-black text-purple-950 text-lg";
+                waves.classList.add('hidden');
+                ring.classList.add('hidden');
+                micBtn.classList.remove('scale-110');
+            }
+        }
+
+        function stopSpeechRecognition() {
+            if (state.speechRecInstance) {
+                try { state.speechRecInstance.stop(); } catch(e){}
+                state.speechRecInstance = null;
+            }
+            setMicActiveState(false);
+        }
+
+        function simulateVoiceInput(text) {
+            playSound('click');
+            document.getElementById('nico-transcript').innerText = `"${text}"`;
+            evaluateSpokenAnswer(text);
+        }
+
+        function evaluateSpokenAnswer(spokenText) {
+            const m = state.missions[4];
+            const targetNumStr = m.target.toString();
+            const targetWord = m.word;
+            const feedback = document.getElementById('m4-feedback');
+            feedback.classList.remove('hidden');
+
+            let isCorrect = false;
+
+            if (m.isRealTalk) {
+                if (spokenText.includes('nineteen') || spokenText.includes('19') || spokenText.includes('there are nineteen')) {
+                    isCorrect = true;
+                }
+            } else {
+                if (spokenText.includes(targetWord) || spokenText.includes(targetNumStr)) {
+                    isCorrect = true;
+                }
+            }
+
+            if (isCorrect) {
+                playSound('win'); addStars(10);
+                feedback.className = 'p-4 rounded-2xl text-center font-bold text-base bg-emerald-100 text-emerald-900 border-2 border-emerald-300';
+                feedback.innerText = `🗣️ Excellent Speaking! Nico heard "${m.word}" loud and clear! (+10 Stars)`;
+
+                setTimeout(() => {
+                    if (m.round < m.maxRounds) {
+                        m.round++;
+                        setupM4Round();
+                    } else {
+                        feedback.innerText = `🏆 Mission 4 Completed! Master Echo Cave Speaking Star!`;
+                        setTimeout(() => backToMissionHub(), 2200);
+                    }
+                }, 1600);
+            } else {
+                playSound('wrong');
+                feedback.className = 'p-4 rounded-2xl text-center font-bold text-base bg-rose-100 text-rose-900 border-2 border-rose-300';
+                
+                if (m.target === 13 && spokenText.includes('thirty')) {
+                    feedback.innerText = `Almost! Nico heard "30 (thirty)". Remember for 13: stretch the end (thir-TEEN)! Try again!`;
+                    speakText("Almost! Stretch the end: thir-TEEN!");
+                } else if (m.target === 30 && spokenText.includes('thirteen')) {
+                    feedback.innerText = `Almost! Nico heard "13 (thirteen)". For 30: short stress at start (THIR-ty)!`;
+                    speakText("Almost! Stress the start: THIR-ty!");
+                } else {
+                    feedback.innerText = `Nico heard "${spokenText}". Keep practicing! Try saying "${m.word}" out loud!`;
+                    speakText(`Try again! Say ${m.word}`);
+                }
+            }
+        }
+
+        /* MEDIA RECORDER PLAYBACK */
+        async function toggleMyVoiceRecording() {
+            playSound('click');
+            const btn = document.getElementById('rec-voice-btn');
+
+            if (state.mediaRecorder && state.mediaRecorder.state === 'recording') {
+                state.mediaRecorder.stop();
+                btn.innerHTML = `<span>🔴 Record My Voice</span>`;
+                btn.className = "bg-amber-100 hover:bg-amber-200 text-amber-950 border border-amber-300 font-heading font-bold text-xs px-4 py-2 rounded-xl flex items-center space-x-1 transition";
+                return;
+            }
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                state.mediaRecorder = new MediaRecorder(stream);
+                state.audioChunks = [];
+
+                state.mediaRecorder.ondataavailable = (e) => {
+                    if (e.data.size > 0) state.audioChunks.push(e.data);
+                };
+
+                state.mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(state.audioChunks, { type: 'audio/webm' });
+                    state.recordedVoiceUrl = URL.createObjectURL(audioBlob);
+                    const playBtn = document.getElementById('play-voice-btn');
+                    playBtn.disabled = false;
+                    playBtn.className = "bg-mintgreen hover:bg-emeraldgreen text-deepblue border border-emerald-400 font-heading font-bold text-xs px-4 py-2 rounded-xl flex items-center space-x-1 transition cursor-pointer shadow";
+                    showToast('Voice clip recorded! Click "Hear My Voice" to listen back!', 'success');
+                };
+
+                state.mediaRecorder.start();
+                btn.innerHTML = `<span>⏹️ Stop Recording...</span>`;
+                btn.className = "bg-rose-500 text-cloudwhite border border-rose-600 font-heading font-bold text-xs px-4 py-2 rounded-xl flex items-center space-x-1 transition animate-pulse";
+            } catch (err) {
+                showToast('Microphone recording unavailable or blocked in iframe sandbox.', 'error');
+            }
+        }
+
+        function playMyRecordedVoice() {
+            if (state.recordedVoiceUrl) {
+                playSound('click');
+                const audio = new Audio(state.recordedVoiceUrl);
+                audio.play();
+            }
+        }
+
+        /* ==========================================================================
+           REAL TALK & TOAST HELPERS
+           ========================================================================== */
+        function playDialogueAudio(qText, aText) {
+            playSound('click');
+            speakText(`${qText} ... ${aText}`);
+        }
+
+        function checkDialogueChoice(btn, isCorrect, explanation) {
+            if (isCorrect) {
+                playSound('win'); addStars(5);
+                btn.className = "bg-emeraldgreen text-cloudwhite border-2 border-cloudwhite text-left p-3 rounded-xl text-xs font-bold transition shadow";
+                showToast(explanation, 'success');
+            } else {
+                playSound('wrong');
+                btn.className = "bg-rose-500 text-cloudwhite border-2 border-cloudwhite text-left p-3 rounded-xl text-xs font-bold transition";
+                showToast(explanation, 'error');
+            }
+        }
+
+        function showToast(msg, type) {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-5 right-5 z-50 p-4 rounded-2xl font-heading font-bold text-sm shadow-2xl transition transform animate-bounce ${
+                type === 'success' ? 'bg-emeraldgreen text-cloudwhite border-2 border-cloudwhite' : 'bg-rose-500 text-cloudwhite border-2 border-cloudwhite'
+            }`;
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3500);
+        }
+
+        function updateCertificateView() {
+            document.getElementById('cert-name').innerText = state.explorerName;
+            document.getElementById('cert-stars').innerText = state.stars;
+            document.getElementById('cert-date').innerText = `Date: ${new Date().toLocaleDateString()}`;
+        }
+
+        /* INITIALIZATION */
+        window.onload = function() {
+            buildNumberGrid();
+            const m3Inp = document.getElementById('m3-input');
+            if (m3Inp) {
+                m3Inp.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') checkM3Answer();
+                });
+            }
+        };
+    </script>
+</body>
+</html>
